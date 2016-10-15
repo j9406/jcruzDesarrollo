@@ -31,12 +31,19 @@ db.grades.remove({"student_id":3});
 //WriteResult({ "nRemoved" : 4 })
 //8) ¿Que estudiantes obtuvieron 75.29561445722392 en una tarea ?
 db.grades.find({"score": 75.29561445722392});
-//RESPUESTA:
+db.grades.find({score: 75.29561445722392}, {_id:0, score:0, type:0});
+//RESPUESTA de primera instruccion:
 //{ "_id" : ObjectId("50906d7fa3c412bb040eb59e"), "student_id" : 9, "type" : "homework", "score" : 75.29561445722392 }
+//RESPUESTA de segunda instruccion:
+//{ "student_id" : 9 }
 //9) Actualiza las calificaciones del registro con el uuid 50906d7fa3c412bb040eb591 por 100
 db.grades.update({"_id":ObjectId("50906d7fa3c412bb040eb591")}, {$set:{"score": 100}});
 //RESPUESTA:
 // WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 //10) A que estudiante pertenece esta calificación.
 db.grades.find({"_id":ObjectId("50906d7fa3c412bb040eb591")});
-// { "_id" : ObjectId("50906d7fa3c412bb040eb591"), "student_id" : 6, "type" : "homework", "score" : 100 }
+db.grades.find({"_id":ObjectId("50906d7fa3c412bb040eb591")},  {_id:0, score:0, type:0});
+// RESPUESTA de primera instruccion:
+//{ "_id" : ObjectId("50906d7fa3c412bb040eb591"), "student_id" : 6, "type" : "homework", "score" : 100 }
+//RESPUESTA de segunda instruccion:
+//{ "student_id" : 6 }
